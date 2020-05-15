@@ -1,8 +1,8 @@
 # Managed Disks Double Encryption Preview 
 
-The repository contains sample templates for enabling double encryption for managed disks. 
+The repository contains sample templates for enabling double encryption at rest for managed disks. Double encryption at rest is the continuation of server-side encryption (SSE) at rest with customer managed keys (CMK) that we recently announced in GA for managed disks. If you are hosting VM/VMSS with managed disks and already leveraging SSE with CMK capability, now you can also enable double encryption at rest.
 
-To enable double encryption for Managed Disks attached to VMs/VMSS, you must follow the steps below:
+To enable double encryption at rest for Managed Disks attached to VMs/VMSS, you must follow the steps below:
 
 1. Create a DiskEncryptionSet with encryptionType set as EncryptionAtRestWithPlatformAndCustomerKeys. Please use the API version *2020-05-01* in the Azure Resource Manager (ARM) template. Please refer to the sample ARM template [CreateDiskEncryptionSetForDoubleEncryption.json](https://github.com/ramankumarlive/manageddisksdoubleencryptionpreview/blob/master/CreateDiskEncryptionSetForDoubleEncryption.json)
 
