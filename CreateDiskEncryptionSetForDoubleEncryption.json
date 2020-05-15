@@ -17,6 +17,11 @@
     "keyVaultKeyUrl":{  
          "type":"string",
          "defaultValue": "https://mdcmktesting.vault.azure.net/keys/myKeyName/403445136dee4a57af7068cab08f7d42"
+      },
+    "encryptionType":{  
+         "type":"string",
+         "defaultValue": "EncryptionAtRestWithPlatformAndCustomerKeys",
+         "allowedValues": ["EncryptionAtRestWithPlatformAndCustomerKeys", "EncryptionAtRestWithCustomerKeys"]
       }
    },
    "resources":[  
@@ -35,7 +40,7 @@
               },
               "keyUrl": "[parameters('keyVaultKeyUrl')]"
             },
-            "encryptionType":"EncryptionAtRestWithPlatformAndCustomerKeys"
+            "encryptionType":"[parameters('encryptionType')]"
 
          }
       }
