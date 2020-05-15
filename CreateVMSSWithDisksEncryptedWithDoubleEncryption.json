@@ -2,7 +2,7 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "vmSku": {
+    "vmSize": {
       "type": "string",
       "defaultValue": "Standard_DS3_V2",
       "metadata": {
@@ -38,6 +38,7 @@
     },
     "adminUsername": {
       "type": "string",
+      "defaultValue": "adminUserIsTest",
       "metadata": {
         "description": "Admin username on all VMs."
       }
@@ -173,7 +174,7 @@
         "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
       ],
       "sku": {
-        "name": "[parameters('vmSku')]",
+        "name": "[parameters('vmSize')]",
         "tier": "Standard",
         "capacity": "[parameters('instanceCount')]"
       },
