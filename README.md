@@ -1,6 +1,8 @@
 # Managed Disks Double Encryption Preview 
 
-The repository contains sample templates for enabling double encryption for managed disks. To enable double encryption for Managed Disks, you must follow the steps below:
+The repository contains sample templates for enabling double encryption for managed disks. 
+
+To enable double encryption for Managed Disks attached to VMs/VMSS, you must follow the steps below:
 
 1. Create a DiskEncryptionSet with encryptionType set as EncryptionAtRestWithPlatformAndCustomerKeys. Please use the API version *2020-05-01* in the Azure Resource Manager (ARM) template. Please refer to the sample ARM template [CreateDiskEncryptionSetForDoubleEncryption.json](https://github.com/ramankumarlive/manageddisksdoubleencryptionpreview/blob/master/CreateDiskEncryptionSetForDoubleEncryption.json)
 
@@ -17,12 +19,25 @@ New-AzResourceGroupDeployment -ResourceGroupName CMKTesting `
 2. Create a VM with managed disks using the resource URI of the DiskEncryptionSet created in the step #1
 
 ```PowerShell
-$password=ConvertTo-SecureString -String "Password@123" -AsPlainText -Force
-New-AzResourceGroupDeployment -ResourceGroupName CMKTesting `
+$password=ConvertTo-SecureString -String "yourPassword" -AsPlainText -Force
+New-AzResourceGroupDeployment -ResourceGroupName yourResourceGroupName `
   -TemplateUri "https://raw.githubusercontent.com/ramankumarlive/manageddisksdoubleencryptionpreview/master/CreateVMWithDisksEncryptedWithDoubleEncryption.json" `
   -virtualMachineName "ramandssecmk1" `
   -adminPassword $password `
   -vmSize "Standard_DS3_V2" `
-  -diskEncryptionSetId "/subscriptions/dd80b94e-0463-4a65-8d04-c94f403879dc/resourceGroups/CMKTesting/providers/Microsoft.Compute/diskEncryptionSets/myDESForDoubleEncryption" `
+  -diskEncryptionSetId "/subscriptions/dd80b94e-0463-4a65-8d04-c94f403879dc/resourceGroups/yourResourceGroupName/providers/Microsoft.Compute/diskEncryptionSets/yourDESForDoubleEncryption" `
+  -region "CentralUSEUAP"
+```
+
+3. Create a VMSS with managed disks using the resource URI of the DiskEncryptionSet created in the step #1
+
+```PowerShell
+$password=ConvertTo-SecureString -String "yourPassword" -AsPlainText -Force
+New-AzResourceGroupDeployment -ResourceGroupName yourResourceGroupName `
+  -TemplateUri "https://raw.githubusercontent.com/ramankumarlive/manageddisksdoubleencryptionpreview/master/CreateVMSSWithDisksEncryptedWithDoubleEncryption.json" `
+  -vmssName "vmssde2" `
+  -adminPassword $password `
+  -vmSize "Standard_DS3_V2" `
+  -diskEncryptionSetId "/subscriptions/dd80b94e-0463-4a65-8d04-c94f403879dc/resourceGroups/yourResourceGroupName/providers/Microsoft.Compute/diskEncryptionSets/yourDESForDoubleEncryption" `
   -region "CentralUSEUAP"
 ```
