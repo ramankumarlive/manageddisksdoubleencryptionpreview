@@ -21,7 +21,7 @@
     "encryptionType":{  
          "type":"string",
          "defaultValue": "EncryptionAtRestWithPlatformAndCustomerKeys",
-         "allowedValues": ["EncryptionAtRestWithPlatformAndCustomerKeys", "EncryptionAtRestWithCustomerKeys"]
+         "allowedValues": ["EncryptionAtRestWithPlatformAndCustomerKeys", "EncryptionAtRestWithCustomerKey"]
       }
    },
    "resources":[  
